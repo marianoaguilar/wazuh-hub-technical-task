@@ -1,0 +1,31 @@
+{
+  "_request": "GET /syscollector/001/os (Wazuh server API, port 55000, via dashboard Dev Tools, user wazuh-wui)",
+  "_captured": "2026-11-10",
+  "_redacted": "hostname of agent 001 replaced (it contained a personal name and the laptop model)",
+  "data": {
+    "affected_items": [
+      {
+        "os": {
+          "codename": "jammy",
+          "major": "22",
+          "minor": "04",
+          "name": "Ubuntu",
+          "platform": "ubuntu",
+          "version": "22.04.5 LTS (Jammy Jellyfish)"
+        },
+        "scan": { "id": 0, "time": "2026-11-10T18:44:46+00:00" },
+        "hostname": "<lab-agent-001-hostname>",
+        "release": "6.8.0-138-generic",
+        "sysname": "Linux",
+        "version": "#138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC",
+        "architecture": "x86_64",
+        "agent_id": "001"
+      }
+    ],
+    "total_affected_items": 1,
+    "total_failed_items": 0,
+    "failed_items": []
+  },
+  "message": "All specified syscollector information was returned",
+  "error": 0
+}

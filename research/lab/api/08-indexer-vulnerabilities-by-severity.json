@@ -1,0 +1,21 @@
+{
+  "_request": "GET wazuh-states-vulnerabilities-*/_search with size 0, query term agent.id=001, terms aggregation on vulnerability.severity (Wazuh indexer, port 9200, via dashboard Dev Tools)",
+  "_captured": "2026-11-10",
+  "took": 2,
+  "timed_out": false,
+  "_shards": { "total": 1, "successful": 1, "skipped": 0, "failed": 0 },
+  "hits": { "total": { "value": 6554, "relation": "eq" }, "max_score": null, "hits": [] },
+  "aggregations": {
+    "por_gravedad": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        { "key": "Medium", "doc_count": 3045 },
+        { "key": "High", "doc_count": 1861 },
+        { "key": "-", "doc_count": 956 },
+        { "key": "Low", "doc_count": 587 },
+        { "key": "Critical", "doc_count": 105 }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "_request": "GET wazuh-states-vulnerabilities-*/_count (Wazuh indexer, port 9200, via dashboard Indexer management > Dev Tools)",
+  "_captured": "2026-11-10",
+  "count": 6554,
+  "_shards": { "total": 1, "successful": 1, "skipped": 0, "failed": 0 }
+}

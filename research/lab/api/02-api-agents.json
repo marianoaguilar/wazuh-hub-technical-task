@@ -1,0 +1,28 @@
+{
+  "_request": "GET /agents?select=id,name,status,version,os.name,os.version (Wazuh server API, port 55000, via dashboard Dev Tools, user wazuh-wui)",
+  "_captured": "2026-11-10",
+  "_redacted": "agent 001 name replaced with <lab-agent-001>",
+  "data": {
+    "affected_items": [
+      {
+        "os": { "name": "Amazon Linux", "version": "2023" },
+        "name": "wazuh.manager",
+        "id": "000",
+        "status": "active",
+        "version": "Wazuh v4.14.10"
+      },
+      {
+        "os": { "name": "Ubuntu", "version": "22.04.5 LTS" },
+        "name": "<lab-agent-001>",
+        "id": "001",
+        "status": "active",
+        "version": "Wazuh v4.14.10"
+      }
+    ],
+    "total_affected_items": 2,
+    "total_failed_items": 0,
+    "failed_items": []
+  },
+  "message": "All selected agents information was returned",
+  "error": 0
+}

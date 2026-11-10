@@ -1,0 +1,65 @@
+{
+  "_request": "GET /syscollector/001/packages?search=openssl&limit=3 (Wazuh server API, port 55000, via dashboard Dev Tools, user wazuh-wui)",
+  "_captured": "2026-11-10",
+  "_redacted": "nothing to redact (vendor is the public Ubuntu developers list)",
+  "data": {
+    "affected_items": [
+      {
+        "scan": { "id": 0, "time": "2026-11-09T10:52:20+00:00" },
+        "name": "libssl3",
+        "multiarch": "same",
+        "priority": "optional",
+        "version": "3.0.2-0ubuntu1.30",
+        "size": 5981184,
+        "location": " ",
+        "section": "libs",
+        "install_time": " ",
+        "format": "deb",
+        "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+        "architecture": "amd64",
+        "source": "openssl",
+        "description": "Secure Sockets Layer toolkit - shared libraries",
+        "agent_id": "001"
+      },
+      {
+        "scan": { "id": 0, "time": "2026-11-09T10:52:32+00:00" },
+        "name": "ssl-cert",
+        "multiarch": "foreign",
+        "priority": "optional",
+        "version": "1.1.2",
+        "size": 65536,
+        "location": " ",
+        "section": "utils",
+        "install_time": " ",
+        "format": "deb",
+        "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+        "architecture": "all",
+        "source": " ",
+        "description": "simple debconf wrapper for OpenSSL",
+        "agent_id": "001"
+      },
+      {
+        "scan": { "id": 0, "time": "2026-11-09T10:52:48+00:00" },
+        "name": "perl-openssl-defaults",
+        "multiarch": "same",
+        "priority": "optional",
+        "version": "5build2",
+        "size": 27648,
+        "location": " ",
+        "section": "perl",
+        "install_time": " ",
+        "format": "deb",
+        "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+        "architecture": "amd64",
+        "source": " ",
+        "description": "version compatibility baseline for Perl OpenSSL packages",
+        "agent_id": "001"
+      }
+    ],
+    "total_affected_items": 10,
+    "total_failed_items": 0,
+    "failed_items": []
+  },
+  "message": "All specified syscollector information was returned",
+  "error": 0
+}

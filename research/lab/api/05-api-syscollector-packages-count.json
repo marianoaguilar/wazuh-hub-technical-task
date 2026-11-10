@@ -1,0 +1,31 @@
+{
+  "_request": "GET /syscollector/001/packages?limit=1 (Wazuh server API, port 55000, via dashboard Dev Tools, user wazuh-wui)",
+  "_captured": "2026-11-10",
+  "_note": "used for the total number of installed packages on agent 001",
+  "data": {
+    "affected_items": [
+      {
+        "scan": { "id": 0, "time": "2026-11-09T10:51:44+00:00" },
+        "name": "libxext-dev",
+        "multiarch": "same",
+        "priority": "optional",
+        "version": "2:1.3.4-1build1",
+        "size": 318464,
+        "location": " ",
+        "section": "libdevel",
+        "install_time": " ",
+        "format": "deb",
+        "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+        "architecture": "amd64",
+        "source": "libxext",
+        "description": "X11 miscellaneous extensions library (development headers)",
+        "agent_id": "001"
+      }
+    ],
+    "total_affected_items": 2809,
+    "total_failed_items": 0,
+    "failed_items": []
+  },
+  "message": "All specified syscollector information was returned",
+  "error": 0
+}
