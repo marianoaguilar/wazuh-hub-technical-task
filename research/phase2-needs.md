@@ -41,7 +41,8 @@ or AI fit 1 is discarded whatever its total.
 ### N1. Vulnerability triage: acknowledge, explain and prioritise CVE findings
 - **Evidence.** GitHub: no way to acknowledge, exclude or annotate CVEs (PGV 1, 3, 4; #26874 5 👍,
   22 comments; #26819 7 👍, still Open on its page; #4413 closed as not planned in Mar 2026);
-  since 4.8 no alert events, so no resolution history (PGV 8; PGD 7). Forum: 13 of the ~28
+  for 4.8.0 agents no alerts in wazuh-alerts-* and "by design" no alert on inventory refresh, so
+  resolution history is incomplete (PGV 8; PGD 7; PCV 9); some changes still raise alerts (PCV 7). Forum: 13 of the ~28
   visible threads in the default listing are about vulnerability detection (PCV 1); 22 of 30
   results for "false positive" (PCV 2); cases: patched packages flagged (PCV 3), feed changes
   marking CVEs "Solved" (PCV 5), bursts of hundreds of alerts users had to reason out (PCV 6, 7),

@@ -15,6 +15,7 @@ present the work.
 | `PHASE3.md` | Design of the SaaS service |
 | `PHASE4.md` | Plan to build and run the service with AI agents |
 | `screenshots/` | Screenshots of my Wazuh lab |
+| `research/phase2-needs.md`, `research/phase2-ideas.md` | Phase 2: scored catalogue of needs, and service ideas for the chosen one |
 | `research/sources/` | Research notes, one per source or topic, every claim with its URL |
 | `research/verification/` | Reports that check each note's claims against its sources |
 | `research/ai-log.md` | Log of the mistakes I caught in the AI's work and how I corrected them |

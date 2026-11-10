@@ -5,10 +5,11 @@ Sources and notes behind PHASE2.md and PHASE3.md.
 ## How to read this folder
 
 1. Start with [`../PHASE2.md`](../PHASE2.md): the answers, each with links to the notes below.
-2. Then `phase2-needs.md` (Step 4, pending): every candidate need, its scores and its notes.
+2. Then [`phase2-needs.md`](phase2-needs.md): every candidate need, its scores and its notes, and
+   [`phase2-ideas.md`](phase2-ideas.md): the service ideas for the chosen need.
 3. Open a note in `sources/` only to check a claim: every claim has its URL, a quote and a
    confidence level.
-4. The AI mistakes found along the way are in [`ai-log.md`](ai-log.md) (rows 2–7). Each note
+4. The AI mistakes found along the way are in [`ai-log.md`](ai-log.md) (Phase 2: rows 2–9). Each note
    lists what was corrected in its "Changes after verification" section.
 5. Reports in `verification/` show the **latest** check of each note. The first-round reports
    (with most of the findings) were overwritten by the second round; their findings survive in
@@ -78,3 +79,8 @@ Gartner returned 403; Stack Overflow / Server Fault were not covered.
 | [landscape-competitor-ai](sources/landscape-competitor-ai.md) | AI assistants in other SIEMs | [PASS\*](verification/landscape-competitor-ai.verify.md) |
 | [landscape-rule-tuning-guidance](sources/landscape-rule-tuning-guidance.md) | Rule tuning and testing guidance | [PASS\*](verification/landscape-rule-tuning-guidance.verify.md) (2 claims fixed) |
 | [landscape-pharos-vesper](sources/landscape-pharos-vesper.md) | Wazuh Pharos and Vesper | [PASS\*](verification/landscape-pharos-vesper.verify.md) (summary wording fixed) |
+
+### PHASE2.md itself ([prompt](../workflow/prompts/phase2/09-verify-phase2.md))
+| File | Topic | Verification |
+|------|-------|--------------|
+| [`../PHASE2.md`](../PHASE2.md) | Phase 2 answers | [NEEDS FIXES → fixed](verification/PHASE2.verify.md) (0 not supported; 9 partial, all reworded, see `ai-log.md` row 9) |

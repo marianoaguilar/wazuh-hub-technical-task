@@ -11,7 +11,8 @@ file. "Inference" lines and the keep/drop decisions are my judgement, not facts 
 3. False positives whose cause users must work out alone: backports, installed KBs, feed changes
    (PCV 3, 5; PGV 7).
 4. Bursts of new findings nobody can explain (PCV 6, 7).
-5. No history of resolved vulnerabilities since 4.8, which hurts audits (PGV 8; PGD 7; PCV 9).
+5. Incomplete history of resolved vulnerabilities (no alerts for 4.8.0 agents, none "by design" on
+   inventory refresh), which hurts audits (PGV 8; PGD 7; PCV 9).
 
 ## Ideas
 
