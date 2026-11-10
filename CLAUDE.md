@@ -19,8 +19,9 @@ The brief asks that the repository makes the AI workflow visible: the plan, the 
 everything used to direct the agents. That is why plans, prompts, transcripts, research notes,
 verification reports and the AI corrections log live in the repo.
 
-My lab: Wazuh 4.x (server, indexer, dashboard and one agent) on virtual machines I own.
-`PHASE1.md` describes it.
+My lab: the Wazuh 4.x server, indexer and dashboard run in Docker containers, and the Wazuh
+agent runs on my own Ubuntu machine. `PHASE1.md` describes it. "Own lab" means only these
+containers and this machine.
 
 ### Where things live
 
@@ -85,7 +86,8 @@ My lab: Wazuh 4.x (server, indexer, dashboard and one agent) on virtual machines
 7. **Log corrections.** Every time I correct the AI (wrong claim, invented source, bad reasoning,
    ignored rule), add a row to `research/ai-log.md`.
 8. **Commit.** Small commits as the work progresses, with a prefix: `workflow:`, `research:`,
-   `phase2:`, `phase3:`, `phase4:`, `diagrams:`, `docs:`.
+   `phase2:`, `phase3:`, `phase4:`, `diagrams:`, `docs:`. **Agents never commit on their own:**
+   propose the files to stage and the commit message, then wait for my explicit OK.
 9. **Transcripts.** Exported sessions go to `workflow/transcripts/` only after I check them for
    personal data.
 
@@ -102,4 +104,5 @@ Never run `git push` unless I ask for it in this session. Never use `git commit 
 | Ask before `git push` | Enforced: `ask` permission rule + `guard.py` |
 | `researcher` writes only in `research/sources/`, `verifier` only in `research/verification/` | Enforced: `guard.py` (reads `agent_type` from the hook input) |
 | Subagents cannot run shell commands; `verifier` cannot search or edit | Enforced: `tools:` list of each agent |
+| Agents commit only after my explicit OK | Instructed (this file) |
 | Sources, no invented sources, uncertainty, files not chat, English, own lab, no personal data | Instructed (this file and the agent prompts). Sources are checked by `verifier`; the rest by my review before each commit |

@@ -110,4 +110,5 @@ Add these rows to the structure table: `CLAUDE.md`, `.claude/` (agents, hooks, p
 - **`/path` in project settings** resolves from the project root (checked in the CLI's own schema text).
 - **Tests**: 26 guard cases pass (allow/block/ask). The pre-commit hook rejects a PHASE1 change, a screenshot rename and a forced `.private` add, and allows a normal commit (tested in a throwaway repo).
 - **The guard was live during setup**: it blocked two of my own shell commands only because their text mentioned protected paths (a test on a throwaway repo, and a heredoc). That is expected for a text match.
+- **Correction (from my review)**: the lab is not on VMs. The Wazuh server, indexer and dashboard run in Docker, and the agent runs on my own Ubuntu machine. CLAUDE.md is fixed; the plan text above is left as approved. Logged in `research/ai-log.md` (#1).
 - **Known gap in the Bash guard, found while testing**: it matches the command text. A command that writes its actions into a script file first and then runs the script is not inspected. So the Bash guard stays "best effort", and the git pre-commit hook is the last line of defence for PHASE1.md and screenshots/.
