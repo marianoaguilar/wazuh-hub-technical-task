@@ -52,8 +52,9 @@ containers and this machine.
    not the person.
 4. **Phase 1 is done without AI.** Never edit, rewrite, "fix" or reformat `PHASE1.md` or anything
    in `screenshots/`. Reading them for context is fine.
-5. **The brief is private.** The only file you may read in `.private/` is `.private/task.pdf`.
-   Never copy the brief into the repository verbatim; paraphrase short requirements when needed.
+5. **The brief is never published.** It is `.private/task.pdf`; read it whenever needed, and
+   quoting its phase questions in `PHASEn.md` is fine. The PDF itself must never be committed
+   or pushed.
 6. **Diagram sources.** Every diagram has its source file in `diagrams/src/`.
 
 ## Working rules for agents
@@ -99,7 +100,6 @@ Never run `git push` unless I ask for it in this session. Never use `git commit 
 | Guardrail | How |
 |-----------|-----|
 | No edits to `PHASE1.md` / `screenshots/` | Enforced: permission deny rules, `.claude/hooks/guard.py` (also checks Bash, best effort), `.githooks/pre-commit` |
-| Only `.private/task.pdf` can be read in `.private/` | Enforced: `guard.py` for file tools; any Bash command that mentions `.private` is blocked |
 | `.private/` is never committed | Enforced: `.gitignore` + `.githooks/pre-commit` |
 | Ask before `git push` | Enforced: `ask` permission rule + `guard.py` |
 | `researcher` writes only in `research/sources/`, `verifier` only in `research/verification/` | Enforced: `guard.py` (reads `agent_type` from the hook input) |

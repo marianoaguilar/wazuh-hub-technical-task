@@ -7,10 +7,9 @@ Exit code 2 blocks the call and shows stderr to the agent. Printing a JSON
 
 What it enforces (see CLAUDE.md, "Guardrails"):
   1. No writes to PHASE1.md or screenshots/ (file tools; Bash on a best-effort basis).
-  2. In .private/, only .private/task.pdf can be read; Bash may not mention .private at all.
-  3. The researcher subagent writes only under research/sources/,
+  2. The researcher subagent writes only under research/sources/,
      the verifier subagent only under research/verification/.
-  4. Any `git ... push` command needs the user's confirmation.
+  3. Any `git ... push` command needs the user's confirmation.
 
 Uses only the Python standard library (jq is not installed in my environment).
 """
@@ -21,9 +20,6 @@ import sys
 
 WRITE_TOOLS = {"Write", "Edit", "MultiEdit", "NotebookEdit"}
 FILE_TOOLS = WRITE_TOOLS | {"Read", "Grep", "Glob"}
-
-PRIVATE_DIR = ".private"
-PRIVATE_ALLOWED = ".private/task.pdf"
 
 AGENT_WRITE_DIRS = {
     "researcher": "research/sources/",
@@ -89,15 +85,6 @@ def main() -> None:
         raw = ti.get("file_path") or ti.get("notebook_path") or ti.get("path") or ""
         rel = rel_to_root(raw, root, cwd) if raw else ""
 
-        # Glob/Grep patterns can point into .private without a path argument.
-        pattern = f"{ti.get('pattern', '')} {ti.get('glob', '')}"
-        if tool in {"Glob", "Grep"} and PRIVATE_DIR in pattern:
-            block("searching inside .private/ is not allowed")
-
-        if rel and is_under(rel, PRIVATE_DIR):
-            if not (tool == "Read" and rel == PRIVATE_ALLOWED):
-                block(f"only {PRIVATE_ALLOWED} may be read in .private/ (got {tool} on {rel})")
-
         if tool in WRITE_TOOLS and rel:
             if rel == "PHASE1.md" or is_under(rel, "screenshots"):
                 block(f"{rel} is Phase 1 work written without AI and must not be modified")
@@ -108,8 +95,6 @@ def main() -> None:
 
     if tool == "Bash":
         cmd = ti.get("command", "")
-        if PRIVATE_DIR in cmd:
-            block("shell commands may not touch .private/ (use the Read tool on .private/task.pdf)")
         if PROTECTED_IN_BASH.search(cmd) and BASH_WRITE.search(cmd):
             block("this shell command could modify PHASE1.md or screenshots/, which are read-only")
         if GIT_PUSH.search(cmd):

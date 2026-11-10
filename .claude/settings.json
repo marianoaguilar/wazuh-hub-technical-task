@@ -2,8 +2,7 @@
   "permissions": {
     "deny": [
       "Edit(/PHASE1.md)",
-      "Edit(/screenshots/**)",
-      "Read(/.private/*/**)"
+      "Edit(/screenshots/**)"
     ],
     "ask": [
       "Bash(git push:*)"
