@@ -1,0 +1,14 @@
+#!/bin/sh
+# Rejects commits that touch Phase 1 work (written without AI) or the private brief.
+# Enable once per clone with:  git config core.hooksPath .githooks
+
+bad=$(git diff --cached --name-only --no-renames | grep -E '^(PHASE1\.md$|screenshots/|\.private/)')
+
+if [ -n "$bad" ]; then
+    echo "pre-commit: these paths are protected and cannot be committed:" >&2
+    echo "$bad" | sed 's/^/  - /' >&2
+    echo "PHASE1.md and screenshots/ are final Phase 1 work; .private/ must never be committed." >&2
+    echo "Unstage them with: git restore --staged <path>" >&2
+    exit 1
+fi
+exit 0
