@@ -43,7 +43,7 @@ Use exactly this template:
 ```markdown
 ---
 title: <page title as published>
-url: <canonical URL>
+url: <canonical URL, or "multiple, see claims" for a topic note that cites several sources>
 publisher: <site or organisation>
 source_type: official-docs | github | forum | reddit | blog | other
 wazuh_version: <version the page refers to, or "n/a" / "not stated">
