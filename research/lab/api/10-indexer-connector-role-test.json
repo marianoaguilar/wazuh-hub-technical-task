@@ -1,0 +1,72 @@
+{
+  "_test": "Read-only indexer user for the triage connector. Role created in the dashboard (Indexer management > Security), user triage-connector mapped to it with no backend roles; tests run with curl from the lab host as that user",
+  "_captured": "2026-11-11",
+  "role": {
+    "_request": "GET _plugins/_security/api/roles/triage_connector_read (dashboard Dev Tools, as admin)",
+    "triage_connector_read": {
+      "reserved": false,
+      "hidden": false,
+      "cluster_permissions": [
+        "cluster_composite_ops_ro"
+      ],
+      "index_permissions": [
+        {
+          "index_patterns": [
+            "wazuh-states-vulnerabilities-*"
+          ],
+          "fls": [],
+          "masked_fields": [],
+          "allowed_actions": [
+            "read"
+          ]
+        }
+      ],
+      "tenant_permissions": [],
+      "static": false
+    }
+  },
+  "test_1_read_findings_allowed": {
+    "_request": "GET https://localhost:9200/wazuh-states-vulnerabilities-*/_count as user triage-connector (curl from the lab host)",
+    "response": {
+      "count": 6582,
+      "_shards": {
+        "total": 1,
+        "successful": 1,
+        "skipped": 0,
+        "failed": 0
+      }
+    }
+  },
+  "test_2_read_alerts_forbidden": {
+    "_request": "GET https://localhost:9200/wazuh-alerts-*/_count as user triage-connector (curl from the lab host)",
+    "response": {
+      "error": {
+        "root_cause": [
+          {
+            "type": "security_exception",
+            "reason": "no permissions for [indices:data/read/search] and User [name=triage-connector, backend_roles=[], requestedTenant=null]"
+          }
+        ],
+        "type": "security_exception",
+        "reason": "no permissions for [indices:data/read/search] and User [name=triage-connector, backend_roles=[], requestedTenant=null]"
+      },
+      "status": 403
+    }
+  },
+  "test_3_write_forbidden": {
+    "_request": "POST https://localhost:9200/wazuh-states-vulnerabilities-triage-test/_doc with body {\"test\": \"this write should fail\"} as user triage-connector (curl from the lab host). The index name matches the role's pattern on purpose",
+    "response": {
+      "error": {
+        "root_cause": [
+          {
+            "type": "security_exception",
+            "reason": "no permissions for [indices:data/write/index] and User [name=triage-connector, backend_roles=[], requestedTenant=null]"
+          }
+        ],
+        "type": "security_exception",
+        "reason": "no permissions for [indices:data/write/index] and User [name=triage-connector, backend_roles=[], requestedTenant=null]"
+      },
+      "status": 403
+    }
+  }
+}

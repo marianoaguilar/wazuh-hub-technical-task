@@ -88,7 +88,7 @@ Gartner returned 403; Stack Overflow / Server Fault were not covered.
 ### Phase 3: own lab API responses ([plan step 1](../workflow/plans/02-phase3.md))
 | Note | Topic | Verification |
 |------|-------|--------------|
-| [lab-api-vulnerability-data](sources/lab-api-vulnerability-data.md) | Real, redacted Wazuh API and indexer responses from my lab (`lab/api/`) | n/a (cites my own lab, no URLs) |
+| [lab-api-vulnerability-data](sources/lab-api-vulnerability-data.md) | Real, redacted Wazuh API and indexer responses from my lab (`lab/api/`); claims 10–14 (2026-11-11): test of the connector's read-only indexer role (`lab/api/10`) | n/a (cites my own lab, no URLs) |
 
 ### R5: connecting to Wazuh ([prompt](../workflow/prompts/phase3/01-wazuh-access.md), [verification prompt](../workflow/prompts/phase3/03-verify-design-notes.md))
 | Note | Topic | Verification |

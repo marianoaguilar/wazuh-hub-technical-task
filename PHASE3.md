@@ -67,7 +67,7 @@ Findings are only in the indexer: Wazuh 4.8.0 removed the vulnerability endpoint
 
 The alias → real name table stays in the connector. Users can label hosts and mark them as important ("internet-facing").
 
-**Least privilege.** On the server API, a user with only the `agents_read` and `syscollector_read` policies, not the built-in `readonly` role, which reads everything ([RBAC reference](https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html)). On the indexer, Wazuh documents a read-only user with `read` on an index pattern (`*` in its example, [docs](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.html)). Inference: the connector would get `read` only on `wazuh-states-vulnerabilities-*`; I have not tested that role in my lab.
+**Least privilege.** On the server API, a user with only the `agents_read` and `syscollector_read` policies, not the built-in `readonly` role, which reads everything ([RBAC reference](https://documentation.wazuh.com/current/user-manual/api/rbac/reference.html)). On the indexer, Wazuh documents a read-only user with `read` on an index pattern (`*` in its example, [docs](https://documentation.wazuh.com/current/user-manual/user-administration/rbac.html)). I narrowed it and tested it in my lab ([10](research/lab/api/10-indexer-connector-role-test.json)): a user with `read` only on `wazuh-states-vulnerabilities-*` counts the findings (6582), gets `403` on `wazuh-alerts-*` and `403` when it tries to write, even to an index matching its pattern.
 
 ## How does it keep each customer's data separate, and how do users authenticate?
 
