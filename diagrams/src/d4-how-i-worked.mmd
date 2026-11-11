@@ -1,0 +1,47 @@
+%% D4. How I worked during this task, and the development environment I am comfortable with.
+%% Colours in D4-D5: orange = me (a person), purple = AI agents, green = files and checks in the repository, blue = my machine and lab, grey = outside.
+%% Details: PHASE4.md, CLAUDE.md, .claude/, workflow/, research/ai-log.md.
+flowchart TB
+    subgraph LOOP["🔁 The loop I followed for every step of phases 2-4"]
+        direction LR
+        S1(["👤 <b>1. Plan</b><br/>agent drafts,<br/>I approve"])
+        S2["📝 <b>2. Prompt</b><br/>saved in workflow/<br/>before it runs"]
+        S3["🤖 <b>3. Research</b><br/>researcher reads<br/>sources, writes notes"]
+        S4["🤖 <b>4. Verify</b><br/>verifier checks every<br/>claim against its URL"]
+        S5(["👤 <b>5. Review</b><br/>I read notes and reports,<br/>decide, correct"])
+        S6["🤖 <b>6. Write</b><br/>main session drafts<br/>PHASE files"]
+        S7["📝 <b>7. Log</b><br/>every correction<br/>→ ai-log.md"]
+        S8(["👤 <b>8. Commit</b><br/>only after my OK"])
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7 --> S8
+    end
+
+    subgraph ENV["💻 My environment · Ubuntu"]
+        direction LR
+        ME(["👤 <b>Me</b>"])
+        CC["🤖 <b>Claude Code</b><br/>CLI in VS Code<br/>main session + 2 subagents"]
+        LAB["🐳 <b>Wazuh lab</b><br/>server, indexer, dashboard<br/>in Docker + agent on my machine"]
+        REPO["📁 <b>Git repo → GitHub</b><br/>plans, prompts, notes,<br/>reports, diagrams (Mermaid)"]
+        GUARD["🛡️ <b>Guardrails</b><br/>CLAUDE.md rules, permission rules,<br/>guard hook, pre-commit hook"]
+        ME <-->|"chat: decisions,<br/>corrections"| CC
+        ME -->|"I run every<br/>lab command"| LAB
+        LAB -->|"redacted outputs"| REPO
+        CC -->|"writes files,<br/>proposes commits"| REPO
+        GUARD -.->|"blocks Phase 1 edits, pushes,<br/>writes outside each agent's folder"| CC
+    end
+
+    WEB["🌐 <b>Public sources</b><br/>Wazuh docs, GitHub,<br/>forum, mailing list"]
+    CC -->|"researcher and verifier<br/>read the web"| WEB
+    LOOP ~~~ ENV
+
+    classDef person fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef ai fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef repo fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef env fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef ext fill:#f3f4f6,stroke:#9ca3af,color:#374151
+    class S1,S5,S8,ME person
+    class S3,S4,S6,CC ai
+    class S2,S7,REPO,GUARD repo
+    class LAB env
+    class WEB ext
+    style LOOP fill:#fafafa,stroke:#9ca3af
+    style ENV fill:#eff6ff,stroke:#2563eb

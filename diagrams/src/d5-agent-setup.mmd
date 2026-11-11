@@ -1,0 +1,46 @@
+%% D5. The agent setup I would use to build the triage ledger service, and how a task moves from an idea to production.
+%% Colours in D4-D5: orange = a person, purple = AI agents, green = files and checks, blue = environments, grey = outside.
+%% The files behind this diagram: phase4/agent-setup/ (CLAUDE.example.md, .claude/settings.json, .claude/agents/, pipeline.md).
+flowchart TB
+    subgraph SETUP["🧰 What shapes the agents"]
+        direction LR
+        KNOW["📚 <b>What they know</b><br/>CLAUDE.md: rules that never break<br/>design decisions (ADRs), docs<br/>the approved spec of the task"]
+        AG["🤖 <b>Four agents</b><br/>implementer · reviewer (read-only)<br/>eval-runner · docs-keeper"]
+        CAN["✅ <b>What they can do</b><br/>edit and test in their own branch<br/>run lint, tests, the AI exam<br/>open a pull request"]
+        CANNOT["⛔ <b>What they cannot do</b><br/>no production access or secrets<br/>no customer data<br/>no merge, no deploy"]
+        KNOW --> AG
+        AG --> CAN
+        AG -.- CANNOT
+    end
+
+    subgraph FLOW["🚀 One task, from an idea to production"]
+        direction LR
+        F1(["👤 <b>Idea</b><br/>feedback, bug,<br/>feature"])
+        F2(["👤 <b>Spec approved</b><br/>agent drafts,<br/>a person approves"])
+        F3["🤖 <b>Build</b><br/>tests first, code, docs"]
+        F4["🛡️ <b>CI checks</b><br/>tests, customer isolation,<br/>AI exam, security, docs"]
+        F5["🤖 <b>Agent review</b><br/>against the rules"]
+        F6(["👤 <b>Review + merge</b><br/>only people merge"])
+        F7["🧪 <b>Staging, then<br/>a few customers</b><br/>rollback on errors"]
+        F8(["👤 <b>Production</b><br/>a person releases"])
+        F9["📈 <b>Monitoring</b><br/>uptime, errors,<br/>AI quality signals"]
+        F1 --> F2 --> F3 --> F4 --> F5 --> F6 --> F7 --> F8 --> F9
+        F9 -->|"what we learn<br/>becomes a new task"| F1
+    end
+
+    ENF["🔒 <b>Enforced outside the agent</b><br/>permission rules and hooks, branch protection,<br/>required CI checks, code owners, no production<br/>credentials on the development machine"]
+    SETUP --> FLOW
+    ENF -.- FLOW
+
+    classDef person fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef ai fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef repo fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef env fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef stop fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    class F1,F2,F6,F8 person
+    class AG,F3,F5 ai
+    class KNOW,CAN,F4 repo
+    class F7,F9 env
+    class CANNOT,ENF stop
+    style SETUP fill:#fafafa,stroke:#9ca3af
+    style FLOW fill:#fafafa,stroke:#9ca3af

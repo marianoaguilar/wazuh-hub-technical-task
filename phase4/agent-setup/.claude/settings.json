@@ -1,0 +1,73 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./infra/prod/**)",
+      "Edit(./infra/prod/**)",
+      "Edit(./.github/**)",
+      "Edit(./CODEOWNERS)",
+      "Edit(./.claude/settings.json)",
+      "Edit(./.claude/agents/**)",
+      "Edit(./.claude/hooks/**)",
+      "Edit(./evals/cases/**)",
+      "Bash(kubectl *)",
+      "Bash(terraform apply *)",
+      "Bash(aws *)",
+      "Bash(git push --force *)",
+      "Bash(gh pr merge *)"
+    ],
+    "ask": [
+      "Edit(./db/migrations/**)",
+      "Edit(./services/ingest/auth/**)",
+      "Edit(./prompts/**)",
+      "Edit(./services/proposer/config.yaml)",
+      "Bash(git push *)"
+    ],
+    "allow": [
+      "Bash(make lint *)",
+      "Bash(make test *)",
+      "Bash(make test-isolation *)",
+      "Bash(make eval *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
+    "filesystem": {
+      "denyWrite": [
+        "./.claude/settings.json",
+        "./.claude/agents",
+        "./.claude/hooks",
+        "./.github",
+        "./CODEOWNERS",
+        "./evals/cases",
+        "./infra/prod"
+      ],
+      "denyRead": [
+        "~/.ssh",
+        "~/.aws",
+        "./secrets",
+        "./.env"
+      ]
+    }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Glob|Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
