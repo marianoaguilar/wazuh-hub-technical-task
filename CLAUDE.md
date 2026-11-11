@@ -16,7 +16,7 @@ Wazuh Hub team. The task has five phases:
 | 5 | Present the work | meeting, no file | — |
 
 The brief asks that the repository makes the AI workflow visible: the plan, the commits and
-everything used to direct the agents. That is why plans, prompts, transcripts, research notes,
+everything used to direct the agents. That is why plans, prompts, research notes,
 verification reports and the AI corrections log live in the repo.
 
 My lab: the Wazuh 4.x server, indexer and dashboard run in Docker containers, and the Wazuh
@@ -32,10 +32,9 @@ containers and this machine.
 | `research/sources/` | Research notes, one per source or topic (written by `researcher`). |
 | `research/verification/` | Verification reports (written by `verifier`). |
 | `research/ai-log.md` | Log of every AI mistake I caught and corrected. |
-| `research/README.md` | Index: note → verification status → where it is used. |
+| `research/README.md` | Index: note → prompt → verification status. |
 | `workflow/plans/` | Plans for each step of the work. |
 | `workflow/prompts/` | Prompts I gave to agents, per phase. |
-| `workflow/transcripts/` | Exported agent sessions. |
 | `diagrams/src/` | Diagram sources. Rendered files go in `diagrams/`. |
 | `.claude/` | Agent definitions, guard hook and permissions. |
 | `.githooks/` | Git hooks (pre-commit guard). |
@@ -89,8 +88,6 @@ containers and this machine.
 8. **Commit.** Small commits as the work progresses, with a prefix: `workflow:`, `research:`,
    `phase2:`, `phase3:`, `phase4:`, `diagrams:`, `docs:`. **Agents never commit on their own:**
    propose the files to stage and the commit message, then wait for my explicit OK.
-9. **Transcripts.** Exported sessions go to `workflow/transcripts/` only after I check them for
-   personal data.
 
 Never run `git push` unless I ask for it in this session. Never use `git commit --no-verify` or
 `git add -f`.
