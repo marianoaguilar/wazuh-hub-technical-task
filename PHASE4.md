@@ -111,7 +111,7 @@ Agents that sort feedback see only the text the user sent.
 - **One source of truth:** design docs and ADRs in the repo. Agents read them before changing a component; a new decision is a new ADR that a person accepts.
 - **Never-break rules tested, not only written:** a CI test that every tenant table has Row-Level Security, isolation tests for every new endpoint, a check that no code path changes a status from a model output.
 - **Shared building blocks:** one way to get the tenant from the token, one model client (EU only, model pinned), one validator, reused by every feature.
-- **New features through the same door:** the Phase 2 ideas left for later (what changed between scans, a compliance export) each start as a spec naming the components and rules it touches.
+- **New features through the same door:** the Phase 2 ideas left for later ([I3 change explainer, I4 compliance evidence pack](PHASE2.md#which-service-ideas-did-you-consider-before-reaching-yours-and-what-made-you-drop-them)) each start as a spec naming the components and rules it touches.
 - **Clear boundaries:** the connector's API is versioned and tested against each supported Wazuh version, so Wazuh 5.x changes stay inside the connector.
 - **A person looks at the whole.** Inference: agents work task by task and do not see slow drift; a regular architecture review catches it.
 
