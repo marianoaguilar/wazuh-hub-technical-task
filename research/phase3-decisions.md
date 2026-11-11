@@ -33,6 +33,8 @@ Rules in every option: the tenant comes from the authenticated session, never fr
 
 **Decision (2026-11-10): A for the first version, C as the planned evolution.** Recommended by the agent and chosen by me.
 
+Added on 2026-11-11 (after the outside review of the diagrams): data is encrypted at rest, and our team reads a tenant's data only for the weekly quality sample (D6) or a support case, with every such access logged.
+
 ## D4. How users and connectors authenticate
 **Users.**
 | Option | For | Against |
