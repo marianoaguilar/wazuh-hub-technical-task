@@ -1,0 +1,40 @@
+%% D1. Components of the service and how data flows between them (simple view).
+%% Colours are the same in D1-D3: blue = customer, green = our service, purple = AI, orange = person, grey = outside data.
+%% Details of each box: research/phase3-decisions.md (D1-D8) and PHASE3.md.
+flowchart LR
+    subgraph CUST["🏢 Customer network"]
+        WZ["🛡️ <b>Wazuh</b><br/>finds the vulnerabilities"]
+        CN["🔌 <b>Connector</b><br/>reads Wazuh, host names → aliases"]
+        WZ -->|"read-only"| CN
+    end
+
+    subgraph SAAS["☁️ Triage service · EU"]
+        RE["⚙️ <b>Rules engine</b><br/>groups findings, re-applies<br/>decisions, ranks the fix list"]
+        DB[("🗄️ <b>Database</b><br/>customers' rows kept apart<br/>by the database")]
+        WEB["🖥️ <b>Web app</b>"]
+        RE <--> DB
+        DB <--> WEB
+    end
+
+    AI["🤖 <b>AI model</b><br/>AWS Bedrock · EU<br/>proposes, never decides"]
+    PUB["🌐 <b>Public data</b><br/>exploited CVEs (KEV, EPSS)"]
+    P(["👤 <b>Analyst</b>"])
+
+    CN -->|"outbound only<br/>aliases, no host names"| RE
+    RE -->|"new groups only"| AI
+    AI -->|"proposal, checked<br/>before it is saved"| RE
+    PUB -->|"daily download"| RE
+    WEB <-->|"confirms or rejects,<br/>reads the fix list"| P
+
+    classDef customer fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef service fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef ai fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef person fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef ext fill:#f3f4f6,stroke:#9ca3af,color:#374151
+    class WZ,CN customer
+    class RE,DB,WEB service
+    class AI ai
+    class P person
+    class PUB ext
+    style CUST fill:#eff6ff,stroke:#2563eb
+    style SAAS fill:#f0fdf4,stroke:#16a34a

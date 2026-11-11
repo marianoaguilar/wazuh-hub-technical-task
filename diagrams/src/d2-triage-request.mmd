@@ -1,0 +1,38 @@
+%%{init: {"theme": "base", "themeVariables": {"actorBkg": "#ffffff", "actorBorder": "#6b7280", "actorTextColor": "#111827", "actorLineColor": "#9ca3af", "signalColor": "#374151", "signalTextColor": "#111827", "noteBkgColor": "#f3f4f6", "noteBorderColor": "#d1d5db", "noteTextColor": "#374151"}}}%%
+%% D2. One user request from start to end: "review this week's new findings".
+%% Each column has its own soft colour (as in D1/D3). 🤖 marks an AI call, 👤 a step where a person takes part.
+%% The example is generic on purpose; the real lab case (a kernel CVE) is explained in PHASE3.md.
+%% Counts ("12 new groups", "30 CVEs") are illustrative, not lab results.
+sequenceDiagram
+    box rgb(219,234,254) 🏢 Customer network
+        participant C as 🔌 Connector
+    end
+    box rgb(220,252,231) ☁️ Triage service · EU
+        participant S as ⚙️ Service
+    end
+    box rgb(237,233,254) AI · EU
+        participant A as 🤖 AI model
+    end
+    box rgb(255,237,213) Person
+        actor P as 👤 Analyst
+    end
+
+    Note over C,P: Request: the analyst reviews this week's new findings
+    Note over C,S: Every 6 hours, no person involved
+    C->>S: 1. New findings (host names → aliases)
+    S->>S: 2. Group them by fix and re-apply past decisions
+
+    S->>A: 3. 🤖 "Is this group a real risk?"
+    A-->>S: Proposal + evidence + question for the analyst
+    S->>S: 4. Check the proposal (evidence exists? exploited CVE?)<br/>If it fails: no AI proposal, the analyst decides
+    S->>S: 5. Rank the fix list with fixed rules
+    S->>A: 6. 🤖 "Explain each item of the fix list"
+    A-->>S: Plain-language reasons (the order does not change)
+    S->>P: 7. 📧 "12 new groups to review"
+
+    P->>S: 8. 👤 Signs in
+    S-->>P: "Group of 30 CVEs: needs context" + the AI's question
+    P->>S: 9. 👤 Confirms or changes the proposal → reason, owner, expiry
+    P->>S: 10. 👤 Picks what to patch from the fix list
+
+    Note over C,P: Next sync: the decision is re-applied automatically.<br/>It is reopened if the package changes or the decision expires.

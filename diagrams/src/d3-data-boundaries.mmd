@@ -1,0 +1,33 @@
+%% D3. Where each customer's data goes, and who or what can read it on the way (simple view).
+%% Colours as in D1: blue = customer, green = our service, purple = AI, grey = outside.
+flowchart LR
+    subgraph Z1["🏢 Customer network"]
+        A1["🛡️ Wazuh + 🔌 Connector<br/><br/><b>Data:</b> everything, host names and IPs included<br/><b>Who sees it:</b> only the customer"]
+    end
+
+    subgraph Z2["☁️ Triage service · EU"]
+        A2["🗄️ Database<br/><br/><b>Data:</b> CVE, package, version, host alias,<br/>decisions · encrypted<br/><b>Who sees it:</b> that customer's users, by role;<br/>our team only for quality samples, audited<br/>🔒 customers' rows kept apart by the database"]
+    end
+
+    subgraph Z3["🤖 AI model · AWS Bedrock EU"]
+        A3["<b>Data:</b> one group of one customer, no host names<br/><b>Who sees it:</b> processed by AWS in the EU,<br/>no-retention mode on;<br/>the model maker has no access"]
+    end
+
+    A1 ==>|"only needed fields<br/>aliases, outbound only"| A2
+    A2 ==>|"one customer<br/>per question"| A3
+    A3 -->|"proposal"| A2
+
+    X["Login and email providers:<br/>user accounts and notification emails only,<br/>no vulnerability data"]
+    A2 -.- X
+
+    classDef customer fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef service fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef ai fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef ext fill:#f3f4f6,stroke:#9ca3af,color:#374151
+    class A1 customer
+    class A2 service
+    class A3 ai
+    class X ext
+    style Z1 fill:#eff6ff,stroke:#2563eb
+    style Z2 fill:#f0fdf4,stroke:#16a34a
+    style Z3 fill:#faf5ff,stroke:#7c3aed
