@@ -1,2 +1,4 @@
 .private
 .claude/settings.local.json
+prototype/data/
+__pycache__/

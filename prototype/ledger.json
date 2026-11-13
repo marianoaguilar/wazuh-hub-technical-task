@@ -1,0 +1,12 @@
+{
+  "decisions": [
+    {
+      "package": "linux-image-6.8.0-138-generic",
+      "package_version": "6.8.0-138.138~22.04.1",
+      "status": "fix_pending",
+      "reason": "old kernel, not running (host runs 6.8.0-149); remove the package",
+      "owner": "analyst",
+      "expires": "2026-11-20"
+    }
+  ]
+}
